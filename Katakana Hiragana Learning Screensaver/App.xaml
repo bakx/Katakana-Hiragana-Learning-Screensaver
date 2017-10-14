@@ -1,9 +1,9 @@
-﻿<Application x:Class="Katakana_Hiragana_Learning_Screensaver.App"
+﻿<Application x:Class="Screensaver.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:Katakana_Hiragana_Learning_Screensaver"
-             StartupUri="MainWindow.xaml">
+             xmlns:local="clr-namespace:Screensaver"
+             Startup="App_OnStartup">
     <Application.Resources>
-         
+
     </Application.Resources>
 </Application>

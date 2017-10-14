@@ -1,17 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 
-namespace Katakana_Hiragana_Learning_Screensaver
+namespace Screensaver
 {
     /// <summary>
-    /// Interaction logic for App.xaml
+    ///     Interaction logic for App.xaml
     /// </summary>
-    public partial class App : Application
+    public partial class App
     {
+        /// <summary>
+        ///     Screensaver arguments
+        ///     /s – Start the screensaver
+        ///     /p – Preview the screensaver
+        ///     /c – Configure the screensaver
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void App_OnStartup(object sender, StartupEventArgs e)
+        {
+            string args = e.Args.Length > 0 ? e.Args[0].ToLower() : "";
+
+            switch (args)
+            {
+                case "/p":
+                    break;
+                case "/c":
+                    break;
+                default:
+                    Screensaver.Main.Instance.Start();
+                    break;
+            }
+        }
     }
 }
