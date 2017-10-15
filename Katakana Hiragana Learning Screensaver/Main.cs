@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Windows.Threading;
@@ -43,6 +43,7 @@ namespace Screensaver
         {
             // This function should get a config file
             //
+
             Model = new JapaneseViewModel();
 
             // Loop through all connected screens
@@ -52,8 +53,8 @@ namespace Screensaver
                 {
                     Left = s.WorkingArea.Left,
                     Top = s.WorkingArea.Top,
-                    Width = s.WorkingArea.Width / 2, // Used for debugging
-                    Height = s.WorkingArea.Height / 2 // Used for debugging
+                    Width = s.WorkingArea.Width, // / 2, // Used for debugging
+                    Height = s.WorkingArea.Height // / 2 // Used for debugging
                 };
 
                 windows.Add(window);
@@ -75,7 +76,7 @@ namespace Screensaver
                     window.Update(i);
                 }
             };
-            dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 500);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 750);
             dispatcherTimer.Start();
         }
 

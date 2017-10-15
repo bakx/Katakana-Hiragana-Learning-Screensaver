@@ -70,11 +70,9 @@ namespace Screensaver.ViewModels
             }
         }
 
-        public int FontSize { get; set; } = 256;
+        public int FontSize { get; set; } = 512;
         public int CharacterMargin { get; set; } = 125;
         public FontWeight FontWeight { get; set; } = FontWeights.Bold;
-
-        public int CurrentChar { get; set; } = -1;
 
         public virtual int CharacterCount()
         {

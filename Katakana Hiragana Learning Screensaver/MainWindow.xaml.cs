@@ -41,7 +41,7 @@ namespace Screensaver
 
                 BindingOperations.SetBinding(block, TextBlock.TextProperty, textBinding);
 
-                // Forecolor Binding
+                // Fore Color Binding
                 //
 
                 Binding fontColorBinding =
@@ -53,7 +53,9 @@ namespace Screensaver
 
                 BindingOperations.SetBinding(block, TextBlock.ForegroundProperty, fontColorBinding);
 
-                // FontSize Binding
+                // Font Size Binding
+                //
+
                 Binding fontSizeBinding =
                     new Binding
                     {
@@ -62,6 +64,30 @@ namespace Screensaver
                     };
 
                 BindingOperations.SetBinding(block, TextBlock.FontSizeProperty, fontSizeBinding);
+
+                // Font Weight Binding
+                //
+
+                Binding fontWeightBinding =
+                    new Binding
+                    {
+                        Path = new PropertyPath(nameof(model.FontWeight)),
+                        Source = model
+                    };
+
+                BindingOperations.SetBinding(block, TextBlock.FontWeightProperty, fontWeightBinding);
+
+                // Margin Binding
+                //
+
+                Binding marginBinding =
+                    new Binding
+                    {
+                        Path = new PropertyPath(nameof(model.CharacterMargin)),
+                        Source = model
+                    };
+
+                BindingOperations.SetBinding(block, MarginProperty, marginBinding);
 
                 StackPanel.Children.Add(block);
             }
@@ -102,8 +128,6 @@ namespace Screensaver
                         break;
                 }
             }
-
-            UpdateLayout();
         }
     }
 }
