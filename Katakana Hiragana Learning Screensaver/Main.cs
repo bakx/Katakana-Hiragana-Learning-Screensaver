@@ -46,24 +46,64 @@ namespace Screensaver
 
             Model = new JapaneseViewModel();
 
-            // Loop through all connected screens
-            foreach (Screen s in Screen.AllScreens)
+            // Set up screens
+            //
+
+            if (Config.Instance.UseAllScreens)
             {
+                foreach (Screen s in Screen.AllScreens)
+                {
+                    MainWindow window = new MainWindow(Model)
+                    {
+                        Left = s.WorkingArea.Left,
+                        Top = s.WorkingArea.Top,
+                        Width = s.WorkingArea.Width,
+                        Height = s.WorkingArea.Height
+                    };
+
+                    if (Config.Instance.DebugMode)
+                    {
+                        window.Left = s.WorkingArea.Width / 2 - 400;
+                        window.Top = s.WorkingArea.Top / 2 - 300;
+                        window.Width = 800;
+                        window.Height = 600;
+                    }
+
+                    windows.Add(window);
+                }
+            }
+            else
+            {
+                Screen s = Screen.PrimaryScreen;
                 MainWindow window = new MainWindow(Model)
                 {
                     Left = s.WorkingArea.Left,
                     Top = s.WorkingArea.Top,
-                    Width = s.WorkingArea.Width, // / 2, // Used for debugging
-                    Height = s.WorkingArea.Height // / 2 // Used for debugging
+                    Width = s.WorkingArea.Width,
+                    Height = s.WorkingArea.Height
                 };
+
+                if (Config.Instance.DebugMode)
+                {
+                    window.Left = s.WorkingArea.Width / 2 - 400;
+                    window.Top = s.WorkingArea.Top / 2 - 300;
+                    window.Width = 800;
+                    window.Height = 600;
+                }
 
                 windows.Add(window);
             }
+
+            // Show all Windows
+            //
 
             foreach (MainWindow window in windows)
             {
                 window.Show();
             }
+
+            // Initiate timers
+            //
 
             dispatcherTimer = new DispatcherTimer();
             dispatcherTimer.Tick += (sender, args) =>
@@ -76,7 +116,7 @@ namespace Screensaver
                     window.Update(i);
                 }
             };
-            dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 750);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, Config.Instance.CharacterInterval);
             dispatcherTimer.Start();
         }
 

@@ -4,21 +4,35 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Media;
-using Screensaver.Annotations;
 using Screensaver.Languages;
+using Screensaver.Properties;
 
 namespace Screensaver.ViewModels
 {
     public class MainViewModel : ILanguage, INotifyPropertyChanged
     {
-        private Brush backColor = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0));
+        private Brush backColor = Config.Instance.BackColor;
         private string character1 = "";
 
         private string character2 = "";
 
         private string character3 = "";
 
-        private Brush fontColor = new SolidColorBrush(Color.FromArgb(255, 255, 255, 255));
+        private string currentTime = "";
+
+        private Brush fontColor = Config.Instance.FontColor;
+
+        public List<string> DebugMessages { get; } = new List<string>();
+
+        public string CurrentTime
+        {
+            get => currentTime;
+            set
+            {
+                currentTime = value;
+                OnPropertyChanged(nameof(CurrentTime));
+            }
+        }
 
         public string Character1
         {
@@ -70,9 +84,9 @@ namespace Screensaver.ViewModels
             }
         }
 
-        public int FontSize { get; set; } = 512;
-        public int CharacterMargin { get; set; } = 125;
-        public FontWeight FontWeight { get; set; } = FontWeights.Bold;
+        public int FontSize { get; set; } = Config.Instance.FontSize;
+        public int CharacterMargin { get; set; } = Config.Instance.CharacterMargin;
+        public FontWeight FontWeight { get; set; } = Config.Instance.FontWeight;
 
         public virtual int CharacterCount()
         {

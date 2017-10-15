@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
@@ -18,8 +19,10 @@ namespace Screensaver
             InitializeComponent();
             DataContext = model = viewModel;
             Setup();
-        }
 
+            // Hide Mouse Cursor
+            Cursor = Cursors.None;
+        }
 
         private void Setup()
         {
@@ -128,6 +131,11 @@ namespace Screensaver
                         break;
                 }
             }
+        }
+
+        private void MainWindow_OnClosed(object sender, EventArgs e)
+        {
+            Environment.Exit(0);
         }
     }
 }

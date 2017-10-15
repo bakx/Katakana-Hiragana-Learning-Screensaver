@@ -1,28 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using Screensaver.Languages.Characters.Japanese;
+using Screensaver.Languages.Characters.Korean;
 
 namespace Screensaver.Languages
 {
-    public class Japanese : ILanguage
+    public class Korean : ILanguage
     {
         private readonly List<ICharacters> characterSets = new List<ICharacters>();
 
-        public Japanese()
+        public Korean()
         {
-            Katakana katakana = new Katakana();
-            Hiragana hiragana = new Hiragana();
-            //Romaji romaji = new Romaji();
+            Hangul katakana = new Hangul();
 
             characterSets.Add(katakana);
-            characterSets.Add(hiragana);
-            //characterSets.Add(romaji);
         }
 
         public int CharacterCount()
         {
-            return CharacterSets().First().GetCharacters().Count;
+            return CharacterSets().Count;
         }
 
         public List<ICharacters> CharacterSets()
