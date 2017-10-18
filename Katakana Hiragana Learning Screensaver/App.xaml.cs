@@ -22,9 +22,10 @@ namespace Screensaver
             switch (args)
             {
                 case "/p":
-                    Screensaver.Main.Instance.ShowConfig();
+                    Screensaver.Main.Instance.Start();
                     break;
                 case "/c":
+                    Screensaver.Main.Instance.ShowConfig();
                     break;
                 default:
                     Screensaver.Main.Instance.Start();

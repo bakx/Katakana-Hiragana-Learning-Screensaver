@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="" Height="50" Width="50" ShowInTaskbar="False" WindowStyle="None" ResizeMode="NoResize" Margin="0"
         Padding="0"
-        KeyDown="MainWindow_OnKeyDown" MouseMove="MainWindow_OnMouseMove"
+        KeyDown="MainWindow_OnKeyDown"
         Background="{Binding BackColor}">
 
     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
