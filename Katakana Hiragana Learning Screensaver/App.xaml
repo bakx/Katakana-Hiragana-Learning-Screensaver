@@ -5,5 +5,51 @@
 
     <Application.Resources>
 
+        <Style x:Key="DefaultLabel" TargetType="{x:Type Label}">
+            <Setter Property="Width" Value="140" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Foreground" Value="{DynamicResource WindowText}" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+
+        <Style x:Key="DefaultPanel" TargetType="{x:Type StackPanel}">
+            <Style.Resources>
+                <Style TargetType="{x:Type StackPanel}">
+                    <Setter Property="Orientation" Value="Horizontal" />
+                    <Setter Property="Margin" Value="8" />
+                    <Style.Resources>
+                        <Style TargetType="{x:Type Label}" BasedOn="{StaticResource DefaultLabel}" />
+                        <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
+                            <Setter Property="Width" Value="235" />
+                            <Setter Property="Foreground" Value="{DynamicResource WindowText}" />
+                            <Setter Property="AcceptsReturn" Value="False" />
+                        </Style>
+                        <Style TargetType="{x:Type PasswordBox}" BasedOn="{StaticResource {x:Type PasswordBox}}">
+                            <Setter Property="Width" Value="235" />
+                            <Setter Property="Foreground" Value="{DynamicResource WindowText}" />
+                        </Style>
+                    </Style.Resources>
+                </Style>
+                <Style TargetType="{x:Type DockPanel}">
+                    <Setter Property="Margin" Value="0,8,0,0" />
+                    <Style.Resources>
+                        <Style TargetType="{x:Type Label}" BasedOn="{StaticResource DefaultLabel}" />
+                        <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
+                            <Setter Property="Foreground" Value="{DynamicResource WindowText}" />
+                            <Setter Property="AcceptsReturn" Value="False" />
+                            <Setter Property="Margin" Value="0,0,5,0" />
+                        </Style>
+                        <Style TargetType="{x:Type PasswordBox}" BasedOn="{StaticResource {x:Type PasswordBox}}">
+                            <Setter Property="Width" Value="235" />
+                            <Setter Property="Foreground" Value="{DynamicResource WindowText}" />
+                        </Style>
+                    </Style.Resources>
+                </Style>
+
+            </Style.Resources>
+        </Style>
+
     </Application.Resources>
 </Application>

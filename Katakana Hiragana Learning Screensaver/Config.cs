@@ -14,6 +14,8 @@ namespace Screensaver
             CharacterInterval = Settings.Default.CharacterInterval;
             FontSize = Settings.Default.FontSize;
             CharacterMargin = Settings.Default.CharacterMargin;
+            DisplayTime = Settings.Default.DisplayTime;
+            TimeFontSize = Settings.Default.TimeFontSize;
 
             switch (Settings.Default.FontWeight)
             {
@@ -34,6 +36,25 @@ namespace Screensaver
                     break;
             }
 
+            switch (Settings.Default.TimeFontWeight)
+            {
+                case 0:
+                    TimeFontWeight = FontWeights.Normal;
+                    break;
+                case 1:
+                    TimeFontWeight = FontWeights.ExtraBold;
+                    break;
+                case 2:
+                    TimeFontWeight = FontWeights.Heavy;
+                    break;
+                case 3:
+                    TimeFontWeight = FontWeights.Light;
+                    break;
+                default:
+                    TimeFontWeight = FontWeights.Bold;
+                    break;
+            }
+
             byte[] foreColor = ConvertStringToArgb(Settings.Default.ForeColor);
             FontColor = new SolidColorBrush(Color.FromArgb(foreColor[0], foreColor[1], foreColor[2], foreColor[3]));
 
@@ -43,6 +64,7 @@ namespace Screensaver
             DebugMode = Settings.Default.DebugMode;
 
             UseAllScreens = Settings.Default.UseAllScreens;
+            TimeFormat = Settings.Default.TimeFormat;
         }
 
         public static Config Instance
@@ -64,15 +86,17 @@ namespace Screensaver
             }
         }
 
+        public int TimeFontSize { get; set; }
         public int CharacterInterval { get; set; }
         public int FontSize { get; set; }
         public int CharacterMargin { get; set; }
+        public FontWeight TimeFontWeight { get; set; }
         public FontWeight FontWeight { get; set; }
         public Brush FontColor { get; set; }
         public Brush BackColor { get; set; }
         public bool DebugMode { get; set; }
         public bool UseAllScreens { get; set; }
-
+        public bool DisplayTime { get; set; }
         public string TimeFormat { get; set; }
 
 

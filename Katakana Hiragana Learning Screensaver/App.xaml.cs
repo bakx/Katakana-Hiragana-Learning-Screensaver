@@ -22,6 +22,7 @@ namespace Screensaver
             switch (args)
             {
                 case "/p":
+                    Screensaver.Main.Instance.ShowConfig();
                     break;
                 case "/c":
                     break;

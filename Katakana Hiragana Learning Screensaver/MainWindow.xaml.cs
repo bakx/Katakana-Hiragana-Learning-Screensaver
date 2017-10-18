@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Threading;
 using Screensaver.ViewModels;
 
 namespace Screensaver
@@ -30,70 +31,93 @@ namespace Screensaver
 
             for (int i = 0; i < model.CharacterSets().Count; i++)
             {
-                TextBlock block = new TextBlock();
-
-                // Text Binding
-                //
-
-                Binding textBinding =
-                    new Binding
-                    {
-                        Path = new PropertyPath(GetCharacterBinding(i)),
-                        Source = model
-                    };
-
-                BindingOperations.SetBinding(block, TextBlock.TextProperty, textBinding);
-
-                // Fore Color Binding
-                //
-
-                Binding fontColorBinding =
-                    new Binding
-                    {
-                        Path = new PropertyPath(nameof(model.FontColor)),
-                        Source = model
-                    };
-
-                BindingOperations.SetBinding(block, TextBlock.ForegroundProperty, fontColorBinding);
-
-                // Font Size Binding
-                //
-
-                Binding fontSizeBinding =
-                    new Binding
-                    {
-                        Path = new PropertyPath(nameof(model.FontSize)),
-                        Source = model
-                    };
-
-                BindingOperations.SetBinding(block, TextBlock.FontSizeProperty, fontSizeBinding);
-
-                // Font Weight Binding
-                //
-
-                Binding fontWeightBinding =
-                    new Binding
-                    {
-                        Path = new PropertyPath(nameof(model.FontWeight)),
-                        Source = model
-                    };
-
-                BindingOperations.SetBinding(block, TextBlock.FontWeightProperty, fontWeightBinding);
-
-                // Margin Binding
-                //
-
-                Binding marginBinding =
-                    new Binding
-                    {
-                        Path = new PropertyPath(nameof(model.CharacterMargin)),
-                        Source = model
-                    };
-
-                BindingOperations.SetBinding(block, MarginProperty, marginBinding);
-
+                TextBlock block = CreateBinding(GetCharacterBinding(i), nameof(model.FontSize),
+                    nameof(model.FontWeight));
                 StackPanel.Children.Add(block);
             }
+
+            // Add Extra Panel
+            if (Config.Instance.DisplayTime)
+            {
+                TextBlock block = CreateBinding(nameof(model.CurrentTime), nameof(model.TimeFontSize),
+                    nameof(model.TimeFontWeight));
+                ExtraPanel.Children.Add(block);
+
+                DispatcherTimer timeDisplayTimer = new DispatcherTimer();
+                timeDisplayTimer.Tick += (sender, args) =>
+                {
+                    model.CurrentTime = DateTime.Now.ToString(Config.Instance.TimeFormat);
+                };
+                timeDisplayTimer.Interval = new TimeSpan(0, 0, 0, 0, 999);
+                timeDisplayTimer.Start();
+            }
+        }
+
+        private TextBlock CreateBinding(string path, string fontSizePath, string fontWeightPath)
+        {
+            TextBlock block = new TextBlock();
+
+            // Text Binding
+            //
+
+            Binding textBinding =
+                new Binding
+                {
+                    Path = new PropertyPath(path),
+                    Source = model
+                };
+
+            BindingOperations.SetBinding(block, TextBlock.TextProperty, textBinding);
+
+            // Fore Color Binding
+            //
+
+            Binding fontColorBinding =
+                new Binding
+                {
+                    Path = new PropertyPath(nameof(model.FontColor)),
+                    Source = model
+                };
+
+            BindingOperations.SetBinding(block, TextBlock.ForegroundProperty, fontColorBinding);
+
+            // Font Size Binding
+            //
+
+            Binding fontSizeBinding =
+                new Binding
+                {
+                    Path = new PropertyPath(fontSizePath),
+                    Source = model
+                };
+
+            BindingOperations.SetBinding(block, TextBlock.FontSizeProperty, fontSizeBinding);
+
+            // Font Weight Binding
+            //
+
+            Binding fontWeightBinding =
+                new Binding
+                {
+                    Path = new PropertyPath(fontWeightPath),
+                    Source = model
+                };
+
+            BindingOperations.SetBinding(block, TextBlock.FontWeightProperty, fontWeightBinding);
+
+            // Margin Binding
+            //
+
+            Binding marginBinding =
+                new Binding
+                {
+                    Path = new PropertyPath(nameof(model.CharacterMargin)),
+                    Source = model
+                };
+
+            BindingOperations.SetBinding(block, MarginProperty, marginBinding);
+
+            return block;
         }
 
         private string GetCharacterBinding(int index)
@@ -111,7 +135,14 @@ namespace Screensaver
 
         private void MainWindow_OnKeyDown(object sender, KeyEventArgs e)
         {
-            Main.Instance.Stop();
+            if (e.Key == Key.C)
+            {
+                Main.Instance.ShowConfig();
+            }
+            else
+            {
+                Main.Instance.Stop();
+            }
         }
 
         public void Update(int displayIndex)
@@ -135,7 +166,18 @@ namespace Screensaver
 
         private void MainWindow_OnClosed(object sender, EventArgs e)
         {
-            Environment.Exit(0);
+            if (!Config.Instance.DebugMode)
+            {
+                Main.Instance.Stop();
+            }
+        }
+
+        private void MainWindow_OnMouseMove(object sender, MouseEventArgs e)
+        {
+            if (!Config.Instance.DebugMode)
+            {
+                Main.Instance.Stop();
+            }
         }
     }
 }

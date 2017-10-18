@@ -9,7 +9,7 @@ using Screensaver.Properties;
 
 namespace Screensaver.ViewModels
 {
-    public class MainViewModel : ILanguage, INotifyPropertyChanged
+    public class MainViewModel : CommandBase, ILanguage, INotifyPropertyChanged
     {
         private Brush backColor = Config.Instance.BackColor;
         private string character1 = "";
@@ -85,8 +85,13 @@ namespace Screensaver.ViewModels
         }
 
         public int FontSize { get; set; } = Config.Instance.FontSize;
+        public int TimeFontSize { get; set; } = Config.Instance.TimeFontSize;
         public int CharacterMargin { get; set; } = Config.Instance.CharacterMargin;
         public FontWeight FontWeight { get; set; } = Config.Instance.FontWeight;
+        public FontWeight TimeFontWeight { get; set; } = Config.Instance.TimeFontWeight;
+
+        public int CharacterInterval { get; set; } = Config.Instance.CharacterInterval;
+
 
         public virtual int CharacterCount()
         {
@@ -109,6 +114,11 @@ namespace Screensaver.ViewModels
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        protected override void OnExecute(object parameter)
+        {
+            throw new NotImplementedException();
         }
     }
 }

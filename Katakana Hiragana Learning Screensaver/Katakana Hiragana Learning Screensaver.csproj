@@ -50,6 +50,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ColorPickerWPF, Version=1.0.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ColorPickerWPF.1.0.7\lib\net452\ColorPickerWPF.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -66,12 +69,16 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WriteableBitmapEx.Wpf, Version=1.5.0.0, Culture=neutral, PublicKeyToken=50375ca6144f1c69, processorArchitecture=MSIL">
+      <HintPath>..\packages\WriteableBitmapEx.1.5.0.0\lib\net40\WriteableBitmapEx.Wpf.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CommandBase.cs" />
     <Compile Include="Configuration.xaml.cs">
       <DependentUpon>Configuration.xaml</DependentUpon>
     </Compile>
@@ -82,8 +89,10 @@
     <Compile Include="Languages\Korean.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Main.cs" />
+    <Compile Include="RelayCommand.cs" />
     <Compile Include="ViewModels\KoreanViewModel.cs" />
     <Compile Include="ViewModels\JapaneseViewModel.cs" />
+    <Compile Include="ViewModels\ConfigViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Page Include="Configuration.xaml">
       <SubType>Designer</SubType>
@@ -124,6 +133,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

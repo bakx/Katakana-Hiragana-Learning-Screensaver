@@ -63,10 +63,12 @@ namespace Screensaver
 
                     if (Config.Instance.DebugMode)
                     {
-                        window.Left = s.WorkingArea.Width / 2 - 400;
-                        window.Top = s.WorkingArea.Top / 2 - 300;
-                        window.Width = 800;
-                        window.Height = 600;
+                        window.Left = s.WorkingArea.Left + s.WorkingArea.Width / 4;
+                        window.Top = s.WorkingArea.Top + s.WorkingArea.Height / 4;
+                        // ReSharper disable once PossibleLossOfFraction
+                        window.Width = s.WorkingArea.Width / 2;
+                        // ReSharper disable once PossibleLossOfFraction
+                        window.Height = s.WorkingArea.Height / 2;
                     }
 
                     windows.Add(window);
@@ -85,10 +87,12 @@ namespace Screensaver
 
                 if (Config.Instance.DebugMode)
                 {
-                    window.Left = s.WorkingArea.Width / 2 - 400;
-                    window.Top = s.WorkingArea.Top / 2 - 300;
-                    window.Width = 800;
-                    window.Height = 600;
+                    window.Left = s.WorkingArea.Left + s.WorkingArea.Width / 4;
+                    window.Top = s.WorkingArea.Top + s.WorkingArea.Height / 4;
+                    // ReSharper disable once PossibleLossOfFraction
+                    window.Width = s.WorkingArea.Width / 2;
+                    // ReSharper disable once PossibleLossOfFraction
+                    window.Height = s.WorkingArea.Height / 2;
                 }
 
                 windows.Add(window);
@@ -128,6 +132,14 @@ namespace Screensaver
             }
 
             Application.Current.Shutdown();
+        }
+
+        public void ShowConfig()
+        {
+            Configuration configuration = new Configuration();
+            ConfigViewModel model = new ConfigViewModel(configuration);
+            configuration.DataContext = model;
+            configuration.ShowDialog();
         }
     }
 }

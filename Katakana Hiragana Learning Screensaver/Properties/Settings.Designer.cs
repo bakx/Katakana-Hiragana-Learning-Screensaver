@@ -61,7 +61,7 @@ namespace Screensaver.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("256")]
+        [global::System.Configuration.DefaultSettingValueAttribute("64")]
         public int CharacterMargin {
             get {
                 return ((int)(this["CharacterMargin"]));
@@ -73,7 +73,7 @@ namespace Screensaver.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("5000")]
+        [global::System.Configuration.DefaultSettingValueAttribute("3000")]
         public int CharacterInterval {
             get {
                 return ((int)(this["CharacterInterval"]));
@@ -133,13 +133,37 @@ namespace Screensaver.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("HH:MM:SS")]
+        [global::System.Configuration.DefaultSettingValueAttribute("h:mm:ss")]
         public string TimeFormat {
             get {
                 return ((string)(this["TimeFormat"]));
             }
             set {
                 this["TimeFormat"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("64")]
+        public int TimeFontSize {
+            get {
+                return ((int)(this["TimeFontSize"]));
+            }
+            set {
+                this["TimeFontSize"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("4")]
+        public int TimeFontWeight {
+            get {
+                return ((int)(this["TimeFontWeight"]));
+            }
+            set {
+                this["TimeFontWeight"] = value;
             }
         }
     }

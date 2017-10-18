@@ -1,10 +1,55 @@
 ﻿<Window x:Class="Screensaver.Configuration"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Screensaver"
-        mc:Ignorable="d"
-        Title="Configuration" Height="300" Width="300">
-    <Grid />
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="Configuration" Height="300" Width="400" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
+    WindowStyle="None">
+
+    <StackPanel Style="{StaticResource DefaultPanel}" Orientation="Vertical">
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Character Interval" />
+            <TextBox Text="{Binding CharacterInterval}" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Character Margin" />
+            <TextBox Text="{Binding CharacterMargin}" />
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Back Color" />
+            <TextBox Text="{Binding BackColor}" />
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Font Color" />
+            <TextBox Text="{Binding FontColor}" />
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Font Size" />
+            <TextBox Text="{Binding FontSize}" />
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Font Size" />
+            <TextBox Text="{Binding FontSize}" />
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+            <Button Command="{Binding CancelCommand}">
+                <StackPanel>
+                    <TextBlock Text="Cancel" />
+                </StackPanel>
+            </Button>
+
+            <Button Command="{Binding SaveCommand}">
+                <StackPanel>
+                    <TextBlock Text="Save" />
+                </StackPanel>
+            </Button>
+        </StackPanel>
+
+    </StackPanel>
 </Window>

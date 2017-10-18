@@ -12,10 +12,10 @@
       <Value Profile="(Default)">512</Value>
     </Setting>
     <Setting Name="CharacterMargin" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">256</Value>
+      <Value Profile="(Default)">64</Value>
     </Setting>
     <Setting Name="CharacterInterval" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">5000</Value>
+      <Value Profile="(Default)">3000</Value>
     </Setting>
     <Setting Name="FontWeight" Type="System.Int16" Scope="User">
       <Value Profile="(Default)">1</Value>
@@ -30,7 +30,13 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="TimeFormat" Type="System.String" Scope="User">
-      <Value Profile="(Default)">HH:MM:SS</Value>
+      <Value Profile="(Default)">h:mm:ss</Value>
+    </Setting>
+    <Setting Name="TimeFontSize" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">64</Value>
+    </Setting>
+    <Setting Name="TimeFontWeight" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">4</Value>
     </Setting>
   </Settings>
 </SettingsFile>
