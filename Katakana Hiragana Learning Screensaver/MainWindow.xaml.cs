@@ -75,7 +75,7 @@ namespace Screensaver
             Binding fontColorBinding =
                 new Binding
                 {
-                    Path = new PropertyPath(nameof(model.FontColor)),
+                    Path = new PropertyPath(nameof(model.ForeColor)),
                     Source = model
                 };
 

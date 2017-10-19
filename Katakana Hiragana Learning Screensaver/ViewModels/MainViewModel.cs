@@ -20,7 +20,7 @@ namespace Screensaver.ViewModels
 
         private string currentTime = "";
 
-        private Brush fontColor = Config.Instance.FontColor;
+        private Brush foreColor = Config.Instance.ForeColor;
 
         public List<string> DebugMessages { get; } = new List<string>();
 
@@ -64,13 +64,13 @@ namespace Screensaver.ViewModels
             }
         }
 
-        public Brush FontColor
+        public Brush ForeColor
         {
-            get => fontColor;
+            get => foreColor;
             set
             {
-                fontColor = value;
-                OnPropertyChanged(nameof(FontColor));
+                foreColor = value;
+                OnPropertyChanged(nameof(ForeColor));
             }
         }
 
@@ -84,6 +84,7 @@ namespace Screensaver.ViewModels
             }
         }
 
+        public string TimeFormat { get; set; } = Config.Instance.TimeFormat;
         public int FontSize { get; set; } = Config.Instance.FontSize;
         public int TimeFontSize { get; set; } = Config.Instance.TimeFontSize;
         public int CharacterMargin { get; set; } = Config.Instance.CharacterMargin;
@@ -91,6 +92,8 @@ namespace Screensaver.ViewModels
         public FontWeight TimeFontWeight { get; set; } = Config.Instance.TimeFontWeight;
 
         public int CharacterInterval { get; set; } = Config.Instance.CharacterInterval;
+        public bool UseAllScreens { get; set; } = Config.Instance.UseAllScreens;
+        public bool DisplayTime { get; set; } = Config.Instance.DisplayTime;
 
 
         public virtual int CharacterCount()

@@ -1,6 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Windows.Input;
+using System.Windows.Media;
+using ColorPickerWPF;
+using ColorPickerWPF.Code;
+using Screensaver.Properties;
 
 namespace Screensaver.ViewModels
 {
@@ -13,23 +16,49 @@ namespace Screensaver.ViewModels
             parentWindow = parent;
             CancelCommand = new RelayCommand(Cancel, param => CanExecute(CancelCommand));
             SaveCommand = new RelayCommand(Save, param => CanExecute(SaveCommand));
+            ChangeColorCommand = new RelayCommand(ChangeColor, param => CanExecute(ChangeColorCommand));
         }
 
         public ICommand CancelCommand { get; set; }
         public ICommand SaveCommand { get; set; }
+        public ICommand ChangeColorCommand { get; set; }
 
 
         public new List<string> DebugMessages { get; } = new List<string>();
 
         private void Save(object obj)
         {
-            Properties.Settings.Default.CharacterInterval = CharacterInterval;
-            Properties.Settings.Default.CharacterMargin = CharacterMargin;
-            Properties.Settings.Default.FontSize = FontSize;
-            Properties.Settings.Default.TimeFontSize = TimeFontSize;
+            Settings.Default.CharacterInterval = CharacterInterval;
+            Settings.Default.CharacterMargin = CharacterMargin;
+            Settings.Default.FontSize = FontSize;
+            Settings.Default.TimeFontSize = TimeFontSize;
+            Settings.Default.BackColor = BackColor.ToString();
+            Settings.Default.ForeColor = ForeColor.ToString();
+            Settings.Default.DisplayTime = DisplayTime;
+            Settings.Default.UseAllScreens = UseAllScreens;
+            Settings.Default.TimeFormat = TimeFormat;
 
-            Properties.Settings.Default.Save();
+            Settings.Default.Save();
             parentWindow.Close();
+        }
+
+        private void ChangeColor(object obj)
+        {
+            bool result = ColorPickerWindow.ShowDialog(out Color color, ColorPickerDialogOptions.SimpleView);
+
+            if (!result)
+            {
+                return;
+            }
+
+            if (obj.ToString() == "backcolor")
+            {
+                BackColor = new SolidColorBrush(color);
+            }
+            else
+            {
+                ForeColor = new SolidColorBrush(color);
+            }
         }
 
         private void Cancel(object obj)

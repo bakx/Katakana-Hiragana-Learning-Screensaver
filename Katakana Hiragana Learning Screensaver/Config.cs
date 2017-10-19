@@ -1,6 +1,10 @@
+using System;
+using System.Drawing;
 using System.Windows;
 using System.Windows.Media;
 using Screensaver.Properties;
+using Brush = System.Windows.Media.Brush;
+using Color = System.Drawing.Color;
 
 namespace Screensaver
 {
@@ -55,11 +59,15 @@ namespace Screensaver
                     break;
             }
 
-            byte[] foreColor = ConvertStringToArgb(Settings.Default.ForeColor);
-            FontColor = new SolidColorBrush(Color.FromArgb(foreColor[0], foreColor[1], foreColor[2], foreColor[3]));
+            Color foreColor = ColorTranslator.FromHtml(Settings.Default.ForeColor);
+            ForeColor = new SolidColorBrush(System.Windows.Media.Color.FromArgb((byte) Convert.ToInt16(foreColor.A),
+                (byte) Convert.ToInt16(foreColor.R), (byte) Convert.ToInt16(foreColor.G),
+                (byte) Convert.ToInt16(foreColor.B)));
 
-            byte[] backColor = ConvertStringToArgb(Settings.Default.BackColor);
-            BackColor = new SolidColorBrush(Color.FromArgb(backColor[0], backColor[1], backColor[2], backColor[3]));
+            Color backColor = ColorTranslator.FromHtml(Settings.Default.BackColor);
+            BackColor = new SolidColorBrush(System.Windows.Media.Color.FromArgb((byte) Convert.ToInt16(backColor.A),
+                (byte) Convert.ToInt16(backColor.R), (byte) Convert.ToInt16(backColor.G),
+                (byte) Convert.ToInt16(backColor.B)));
 
             DebugMode = Settings.Default.DebugMode;
 
@@ -92,24 +100,11 @@ namespace Screensaver
         public int CharacterMargin { get; set; }
         public FontWeight TimeFontWeight { get; set; }
         public FontWeight FontWeight { get; set; }
-        public Brush FontColor { get; set; }
+        public Brush ForeColor { get; set; }
         public Brush BackColor { get; set; }
         public bool DebugMode { get; set; }
         public bool UseAllScreens { get; set; }
         public bool DisplayTime { get; set; }
         public string TimeFormat { get; set; }
-
-
-        private static byte[] ConvertStringToArgb(string value)
-        {
-            string[] values = value.Split(',');
-            return new[]
-            {
-                byte.Parse(values[0]),
-                byte.Parse(values[1]),
-                byte.Parse(values[2]),
-                byte.Parse(values[3])
-            };
-        }
     }
 }
